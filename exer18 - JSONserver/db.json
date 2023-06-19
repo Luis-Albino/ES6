@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    {
+      "firstname": "John",
+      "lastname": "Galt",
+      "phone": "123-456-7890",
+      "id": 0
+    },
+    {
+      "firstname": "Luis",
+      "lastname": "Albino",
+      "phone": "323-345-7685",
+      "id": 1
+    },
+    {
+      "firstname": "Rick",
+      "lastname": "Lannen",
+      "phone": "223-234-4759",
+      "id": 2
+    }
+  ]
+}
