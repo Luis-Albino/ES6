@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exer18</title>
+    <link rel="stylesheet" href="./exer18.css">
+</head>
+<body>
+
+    <template id="table">
+        <table id="container">
+        </table>
+    </template>
+
+    <template id="rowTemplate">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>node</td>
+        </tr>
+    </template>
+
+    <template id="candidate">
+        <div>
+            <label for="name">First name</label>
+            <br>
+            <input type="text" id="firstname" placeholder="Input first name">
+            <br>
+            <label for="lastname">Last name</label>
+            <br>
+            <input type="text" id="lastname" placeholder="Input last name">
+            <br>
+            <label for="phone">Phone</label>
+            <br>
+            <input type="text" id="phone" placeholder="Input phone">
+            <br>
+            <a id="info">Info</a>
+            <br>
+            <button id="save">Save</button>
+            <button onclick="tablePage()">Go back</button>
+        </div>
+    </template>
+
+    <script src="./exer18.js"></script>
+    
+</body>
+</html>

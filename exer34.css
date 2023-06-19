@@ -1,0 +1,40 @@
+.container {
+    width: 3in;
+    height: 11in;
+    background: rebeccapurple;
+}
+
+.ball {
+    background: red;
+    width: 1in;
+    height: 1in;
+    border-radius: 50%;
+    position: relative;
+    left: 1in;
+    animation-name: bounce;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+}
+
+@keyframes bounce {
+    0% {top: 0in}
+    5% {top: 10in}
+    10% {top: 1in}
+    15% {top: 10in}
+    20% {top: 2in}
+    25% {top: 10in}
+    30% {top: 3in}
+    35% {top: 10in}
+    40% {top: 4in}
+    45% {top: 10in}
+    50% {top: 5in}
+    55% {top: 10in}
+    60% {top: 6in}
+    65% {top: 10in}
+    70% {top: 7in}
+    75% {top: 10in}
+    80% {top: 8in}
+    85% {top: 10in}
+    90% {top: 9in}
+    95% {top: 10in}
+}

@@ -1,0 +1,16 @@
+#container {
+    height: 300px;
+    width: 300px;
+    border: 2px solid black;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+#ball {
+    height: 30px;
+    width: 30px;
+    background-color: blue;
+    border-radius: 50%;
+    position: relative;
+}
