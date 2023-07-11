@@ -1,6 +1,3 @@
-let div = document.getElementsByTagName("div")[0];
-
-let anchor = document.getElementById("id1");
-anchor.addEventListener("click",function(){
-    div.style.visibility = "visible";
+document.getElementById("id1").addEventListener("click",function(){
+    this.previousElementSibling.style.visibility = "visible";
 })
