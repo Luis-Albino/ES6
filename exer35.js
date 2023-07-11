@@ -1,13 +1,16 @@
-var interchange = true;
-while (interchange) {
-    let row = document.getElementsByTagName("table")[0].getElementsByTagName("tr");
-    for (let i= 1; i<row.length-1; i++) {
-        let age1 = row[i].getElementsByTagName("td")[1].innerText;
-        let age2 = row[i+1].getElementsByTagName("td")[1].innerText;
-        if (age1 < age2) {
-            row[i].parentNode.insertBefore(row[i+1],row[i]);
-            break;
-        }
-        if (i === row.length-2) interchange = false;
-    }
+let row = document.getElementsByTagName("table")[0].getElementsByTagName("tr");
+
+let nodes = [];
+for (let node of row) {
+    nodes.push(node.cloneNode(true))
+};
+
+nodes.sort(function(row1,row2){
+    let age1 = row1.getElementsByTagName("td")[1].innerText;
+    let age2 = row2.getElementsByTagName("td")[1].innerText;
+    return age2 - age1
+})
+
+for (let i=1; i<row.length; i++) {
+    row[i].replaceWith(nodes[i]);
 }
