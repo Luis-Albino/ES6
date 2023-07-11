@@ -1,14 +1,19 @@
 
 function disjunction (obj1,obj2) {
-
-    const keysObj1 = Object.keys(obj1);
-    const keysObj2 = Object.keys(obj2);
+    let object = [obj1,obj2];
+    const keysObj = [];
+    for (let i=0; i<2; i++){
+        keysObj[i] = Object.keys(object[i]);
+        for (let j in keysObj[i]) {
+            keysObj[i][j] += ": " + object[i][keysObj[i][j]]
+        }
+    }
 
     var compare = disjunction.prototype.compare;
 
-    let conjunction = compare(keysObj1,keysObj2,"conjunction");
-    let disjunction1 = compare(keysObj1,conjunction,"disjunction");
-    let disjunction2 = compare(keysObj2,conjunction,"disjunction");
+    let conjunction = compare(keysObj[0],keysObj[1],"conjunction");
+    let disjunction1 = compare(keysObj[0],conjunction,"disjunction");
+    let disjunction2 = compare(keysObj[1],conjunction,"disjunction");
     
     return disjunction1.concat(disjunction2)
 };
