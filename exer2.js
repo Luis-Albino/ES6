@@ -7,14 +7,13 @@ String.prototype.reverse = function () {
 };
 
 String.prototype.reverseWords = function () {
-    let str = "";
+    let str = this.slice(0,this.length);
     let arr = this.match(/[^\s]+/gi);
-    let j = arr.length - 1;
-    for (let i in arr) {
-        str += arr[i].reverse() + (i!=j?" ":"");
+    for (let word of arr) {
+        str = str.replace(word,word.reverse())
     };
-    return str;
+    return str
 };
 
 console.log("hello world".reverse())
-console.log("hello world".reverseWords())
+console.log("hello world".reverseWords());
