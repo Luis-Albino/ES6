@@ -1,3 +1,24 @@
+function* randomIntegerGen (min = 1,max) {
+    let orderedArr = [];
+    let randomArr = [];
+
+    for (let i=min; i<=max; i++) {
+        orderedArr.push(i)
+    };
+
+    while (orderedArr.length) {            
+        let length = orderedArr.length;
+        let index = Math.floor(length*Math.random());
+        randomArr.push(orderedArr[index]);
+        orderedArr.splice(index,1)
+    }
+
+    for (let el of randomArr) {
+        yield el
+    }
+};
+
+
 function randomInteger (min = 1,max) {
     
     if (max === undefined) {
@@ -5,32 +26,28 @@ function randomInteger (min = 1,max) {
     };
     
     let random;
+
     if (max >= min) {
         let length = max-min+1;
-
-        random = Math.floor(min + length*Math.random());
 
         let storage = randomInteger.prototype.storage;
 
         if (!storage[min]) {
             storage[min] = {
-                [max] : []
+                [max] : undefined
             }
         }
         else if (!storage[min][max]) {
-            storage[min][max] = []
+            storage[min][max] = undefined
         };
     
-        if (storage[min][max].includes(random)) {
-            if (storage[min][max].length != length) {
-                random = randomInteger(min,max);
-            }
-            else {
-                random = undefined
-            }
+        if (storage[min][max]) {
+            random = storage[min][max].next().value;
         }
         else {
-            storage[min][max].push(random);
+            random = randomIntegerGen(min,max);
+            storage[min][max] = random;
+            random = random.next().value;
         }
     };
 
