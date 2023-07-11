@@ -1,24 +1,28 @@
-String.prototype.parse = function (str) {
-    let matchArray = (typeof str === "string")?new Array(...str):[null];
+function parse (str,pattern) {
+    let matchArray = (typeof pattern === "string")?new Array(...pattern):[null];
+    pattern = "";
     let iterator = String.prototype.iterator;
     let i = 0;
     let j = 0;
     let index = -1;
-    for (let char of iterator(...this)) {
-        if (char === matchArray[i]) {
+    for (let char of iterator(...str)) {
+        if (char === matchArray[i] || matchArray[i] === "*") {
             i++;
+            pattern += char;
         }
         else {
             i = 0;
+            pattern = "";
         };
 
         j++;
         if (i === matchArray.length) {
-            index = j - i
+            index = j - i;
+            break // to ensure a lazy search
         };
     };
 
-    return (index != -1)?[str,"index: "+index,this]:null
+    return (index != -1)?[pattern,"index: "+index,str]:null
 };
 String.prototype.iterator = function* () {
     for (let el of arguments) {
@@ -26,4 +30,5 @@ String.prototype.iterator = function* () {
     }
 };
 
-console.log("hello world".parse("or"))
+console.log(parse("hello world","*"))
+console.log(parse("hello world","l**"))
