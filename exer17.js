@@ -7,9 +7,8 @@ var candidate = {
     printName: function () {
         return this.name.firstname + " " + this.name.lastname
     }
- };
+};
 
- let info = document.getElementsByClassName("info");
- info[0].innerHTML = candidate.name.firstname;
- info[1].innerHTML = candidate.printName();
- 
+let infoDiv = document.getElementsByClassName("info")[1].getElementsByTagName("div");
+infoDiv[0].textContent = candidate.name.firstname;
+infoDiv[1].textContent = candidate.printName();
