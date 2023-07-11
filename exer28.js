@@ -1,69 +1,40 @@
-/*
-    urlArray =[
-        {   // axCall1 //
-            url: 'http://server',
-            method: 'POST',
-            info: [object],
-            id: '1' // For DELETE and PUT methos
-        },
-        {
-            // axCall2 //
-        }
-    ]
-*/
-
 var async = { 
-    getAll: function (urlArray,callback){
-        let context = []; // callback context
-        for (let axCall of urlArray) {
-            let url = axCall.url;
-            if (axCall.id) url += axCall.id;
-            let init = {
-                method: axCall.method
-            };
-            if (axCall.method !== "GET" || axCall.method !== "DELETE") {
-                init["headers"] = {
-                    "Content-Type": "application/json"
+    getAll: async function (urlArray,callback){
+        let context = await 
+        setContext(urlArray);
+        for (let promise of context) {
+            try {
+                if (!(await promise).ok) {
+                    let index = context.indexOf(promise);
+                    throw new Error('Response to ajax call number ' +(index+1)+' is not ok. URL: "' + urlArray[index])
                 }
-                init["body"] = JSON.stringify(axCall.data)
-            }
-            let promise = fetch(url,init)
-            promise.then(function (response) {
-                return response.json(); // Convert the AJAX response to an array/object data
-            }).then(function (data) {
-                context.push(data) // Execute the callback function
-            })
-        };
-        let loop = setInterval(function(){
-            if (context.length === urlArray.length) {
-                for (let data of context) {
+                promise.then(function (response) {
+                    return response.json();
+                }).then(function (data) {
                     callback(data)
-                }
-                clearInterval(loop);
+                })
             }
-        },0)
+            catch (err) {
+                window.alert(err)
+            };
+        }
     }
 };
+
+function setContext(urlArray) {
+    let context = [];
+    for (let url of urlArray) {
+        context.push(fetch(url))
+    }
+    return context
+}
 
 //////////////////////////////////////////////////////
 // Example: using the same localhost of exercise 18 //
 //////////////////////////////////////////////////////
 
-async.getAll([
-    {
-        url: 'http://localhost:3000/candidates/0',
-        method: 'GET'
-    },
-    {
-        url: 'http://localhost:3000/candidates/1',
-        method: 'GET'
-    },
-    {
-        url: 'http://localhost:3000/candidates/2',
-        method: 'GET'
-    }
-],function (data) {
+async.getAll(['http://localhost:3000/candidates/0','http://localhost:3000/candidates/2','http://localhost:3000/candidates/2'],function (response) {
     let div = document.createElement("div");
-    div.innerHTML = data["firstname"];
+    div.innerHTML = response["firstname"];
     document.body.appendChild(div)
 })
