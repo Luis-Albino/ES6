@@ -24,10 +24,6 @@ let drStrange = new Medic("Stephen","Strange","Surgery");
 
 // AJAX GET request //
 
-function ajaxGet (person,callBack) {
-    setTimeout(() => { callBack(person) }, 0);
+function ajaxGet (url,person) {
+    fetch(url + "?firstName=" + person.firstName + "&lastName=" + person.lastName)
 };
-
-
-ajaxGet(me,function(person){ console.log("Last person = ",Person.prototype.fullName.call(person)) })
-console.log("First person = Dr.",drStrange.fullName());
