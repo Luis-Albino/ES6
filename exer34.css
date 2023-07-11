@@ -12,29 +12,62 @@
     position: relative;
     left: 1in;
     animation-name: bounce;
-    animation-duration: 5s;
+    animation-duration: 10s;
     animation-timing-function: linear;
 }
 
 @keyframes bounce {
-    0% {top: 0in}
-    5% {top: 10in}
-    10% {top: 1in}
-    15% {top: 10in}
-    20% {top: 2in}
-    25% {top: 10in}
-    30% {top: 3in}
-    35% {top: 10in}
-    40% {top: 4in}
-    45% {top: 10in}
-    50% {top: 5in}
-    55% {top: 10in}
-    60% {top: 6in}
-    65% {top: 10in}
-    70% {top: 7in}
-    75% {top: 10in}
-    80% {top: 8in}
-    85% {top: 10in}
-    90% {top: 9in}
-    95% {top: 10in}
+    5% {top: 0in}
+    8.6% {top: 2.5in}
+    10% {top: 5in}
+    11.5% {top: 7.5in}
+    12.2% {top: 10in}
+    12.5% {top: 7.7in}
+    14% {top: 5.5in}
+    15.6% {top: 3.3in}
+    19% {top: 1in}
+    22.4% {top: 3.3in}
+    24% {top: 5.5in}
+    25.5% {top: 7.7in}
+    25.8% {top: 10in}
+    27.8% {top: 6in}
+    29% {top: 4in}
+    32.3% {top: 2in}
+    35.6% {top: 4in}
+    36.8% {top: 6in}
+    38.7% {top: 10in}
+    40.5% {top: 6.5in}
+    41.7% {top: 4.7in}
+    44.7% {top: 3in}
+    47.7% {top: 4.7in}
+    48.9% {top: 6.5in}
+    50.7% {top: 10in}
+    52.4% {top: 7in}
+    53.5% {top: 5.5in}
+    56.3% {top: 4in}
+    59.1% {top: 5.5in}
+    60.2% {top: 7in}
+    61.8% {top: 10in}
+    63.4% {top: 7.5in}
+    64.4% {top: 6.2in}
+    66.9% {top: 5in}
+    69.4% {top: 6.2in}
+    70.4% {top: 7.5in}
+    72% {top: 10in}
+    72.7% {top: 8in}
+    74.3% {top: 7in}
+    76.6% {top: 6in}
+    78.9% {top: 7in}
+    80.5% {top: 8in}
+    81.1% {top: 10in}
+    82.2% {top: 8.5in}
+    83.1% {top: 7.7in}
+    85% {top: 7in}
+    86.9% {top: 7.7in}
+    87.8% {top: 8.5in}
+    89% {top: 10in}
+    92.2% {top: 8in}
+    95.4% {top: 10in}
+    97.7% {top: 9in}
+    100% {top: 10in}
 }
