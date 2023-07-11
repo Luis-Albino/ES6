@@ -1,5 +1,6 @@
-let candidates = [];
-let url = 'http://localhost:3000/candidates/';
+// let candidates = [];
+let candidates = {};
+const url = 'http://localhost:3000/candidates/';
 
 //////////////////
 /// Table page ///
@@ -18,8 +19,9 @@ function tablePage () {
     }).then(function (arr) {
         for (let i in arr) {
             let obj = arr[i];
-            candidates.push(obj);
-            addRow(container,obj["firstname"],obj["lastname"],obj["phone"],'<div id="'+i+'"><a class="edit">edit</a>/<a class="delete">delete</a></div>'); 
+            // candidates.push(obj);
+            candidates[obj["id"]] = obj;
+            addRow(container,obj["firstname"],obj["lastname"],obj["phone"],'<div id="'+obj["id"]+'"><a class="edit">edit</a>/<a class="delete">delete</a></div>'); 
         }
     })
     
