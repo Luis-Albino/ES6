@@ -1,8 +1,13 @@
 ///// String method /////
 
 String.prototype.exclamation = function () {
-    return this+"!";
+    return this.constructor.addExclamation(this);
 };
+
+// static method
+String.addExclamation = function (str) {
+    return str + "!"
+}
 
 console.log("hello".exclamation())
 console.log("hello world".exclamation())
@@ -10,7 +15,7 @@ console.log("hello world".exclamation())
 
 ///// add /////
 
-function add (...args) {
+let add = (...args) =>  {
     let sum = 0;
     for (let el of args) {
         sum += el;
