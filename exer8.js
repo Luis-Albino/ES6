@@ -1,20 +1,19 @@
-// console.log(arr.sort((a, b) => b===0?-1:1))
-
-Array.prototype.moveZeroes = function () {
-    for (let i=0; i < this.length-1; i++) {
-        let j = i+1;
-        while (!this[i] && j < this.length) {
-            if (this[j]) {
-                [this[i],this[j]] = [this[j],this[i]]
-            }
-            else {
-                j++
-            }
+function moveZeroes (arr) {
+    let j = 0;
+    let increment = 1;
+    while (j < arr.length-1) {
+        let i = arr.indexOf(0);
+        j = i + increment;
+        if (arr[j]) {
+            console.log(i,j);
+            [arr[i],arr[j]] = [arr[j],arr[i]];
         }
+        else {
+            increment += 1;
+        };
     }
-    return this
+    return arr
 }
 
 let arr = [2,0,4,5,0,2,0,0,3];
-arr.moveZeroes()
-console.log(arr)
+console.log(moveZeroes(arr));
