@@ -1,11 +1,10 @@
 function parse (str,pattern) {
     let matchArray = (typeof pattern === "string")?new Array(...pattern):[null];
     pattern = "";
-    let iterator = String.prototype.iterator;
     let i = 0;
     let j = 0;
     let index = -1;
-    for (let char of iterator(...str)) {
+    for (let char of str) {
         if (char === matchArray[i] || matchArray[i] === "*") {
             i++;
             pattern += char;
@@ -23,11 +22,6 @@ function parse (str,pattern) {
     };
 
     return (index != -1)?[pattern,"index: "+index,str]:null
-};
-String.prototype.iterator = function* () {
-    for (let el of arguments) {
-        yield el;
-    }
 };
 
 console.log(parse("hello world","*"))
