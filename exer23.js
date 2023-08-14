@@ -1,61 +1,30 @@
-function* randomIntegerGen (min = 1,max) {
-    let orderedArr = [];
-    let randomArr = [];
-
-    for (let i=min; i<=max; i++) {
-        orderedArr.push(i)
-    };
-
-    while (orderedArr.length) {            
-        let length = orderedArr.length;
-        let index = Math.floor(length*Math.random());
-        randomArr.push(orderedArr[index]);
-        orderedArr.splice(index,1)
-    }
-
-    for (let el of randomArr) {
-        yield el
-    }
-};
-
-
-function randomInteger (min = 1,max) {
-    
+function* randomLCG (min = 1,max) {   
     if (max === undefined) {
         [max,min] = [min,0]
     };
-    
-    let random;
 
-    if (max >= min) {
-        let length = max-min+1;
+    if (min > max) return null;
 
-        let storage = randomInteger.prototype.storage;
+    let modulus = max - min;
+    let number;
+    let nextNumber = Date.now() % modulus; // seed
+    const A = 4;  // multiplier  A < modulus
+    let C = 0;    // incrementer c < modulus
+    while (C === 0) {
+        C = Math.floor(modulus*Math.random())
 
-        if (!storage[min]) {
-            storage[min] = {
-                [max] : undefined
-            }
-        }
-        else if (!storage[min][max]) {
-            storage[min][max] = undefined
-        };
-    
-        if (storage[min][max]) {
-            random = storage[min][max].next().value;
-        }
-        else {
-            random = randomIntegerGen(min,max);
-            storage[min][max] = random;
-            random = random.next().value;
-        }
-    };
+    }
 
-    return random
-};
+    for (let i=0; i<modulus; i++) {
+        number = nextNumber;
+        nextNumber = (A*number + C) % modulus;
+        yield min + number
+    }
+}
 
-randomInteger.prototype.storage = {};
-
-for (let i = 0, min = 2, max = 5; i < max-min+1; i++) {
-    console.log(randomInteger(min,max))
+let min = 0;
+let max = 9;
+let random = randomLCG(min,max);
+for(let i=0; i<max-min; i++) {
+    console.log(random.next().value)
 }
