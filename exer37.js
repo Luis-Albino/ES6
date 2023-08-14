@@ -1,12 +1,21 @@
 ///// String method /////
 
 String.prototype.exclamation = function () {
-    return this.constructor.addExclamation(this);
+    let obj = this.constructor.markedObject(this,"!");
+    return this.constructor.addMark(obj);
 };
 
-// static method
-String.addExclamation = function (str) {
-    return str + "!"
+// static methods
+String.addMark = function (obj) {
+    let {string, mark} = obj;
+    return `${string}${mark}`
+}
+
+String.markedObject = function (string,mark) {
+    return {
+        string,
+        mark
+    }
 }
 
 console.log("hello".exclamation())
@@ -15,13 +24,19 @@ console.log("hello world".exclamation())
 
 ///// add /////
 
-let add = (...args) =>  {
-    let sum = 0;
-    for (let el of args) {
-        sum += el;
+let add = (a = null,b = 0,...rest) =>  {
+    let sum = (a === null)?a:(a+b)
+    return sum + addArray(rest) 
+};
+
+function addArray ([a,b = 0,...rest]) {
+    let sum = a??0;
+    sum += b;
+    for (let el of rest) {
+        sum += el
     }
     return sum
-};
+}
 
 console.log(add(2, 5));
 console.log(add(7, 11));
