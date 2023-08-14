@@ -25,5 +25,8 @@ let drStrange = new Medic("Stephen","Strange","Surgery");
 // AJAX GET request //
 
 function ajaxGet (url,person) {
-    fetch(url + "?firstName=" + person.firstName + "&lastName=" + person.lastName)
+    let newURL = new URL(url);
+    newURL.searchParams.set('firstName',person.firstName);
+    newURL.searchParams.set('lastName',person.lastName);
+    fetch(newURL)
 };
