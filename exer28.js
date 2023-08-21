@@ -1,14 +1,10 @@
 var async = { 
-    getAll: function (urlArray,callBack) {
-        let requestArray = [];
-    
-        for (let url of urlArray) {
-            requestArray.push(fetch(url))
-        }
-    
-        Promise.all(requestArray).then((responseArray) => {
+    getAll: function (urlArray,callBack) {    
+        Promise.all(urlArray.map(url => fetch(url)))
+        .then((responseArray) => {
             return Promise.all(responseArray.map(promise => promise.json()))
-        }).then((dataArr) => { 
+        })
+        .then((dataArr) => { 
             callBack(dataArr)
         });
     }
@@ -22,9 +18,11 @@ let myUrlArray = ['http://localhost:3000/candidates/0','http://localhost:3000/ca
 
 function myCallBack (dataArr) {
     for (let data of dataArr) {
-        let div = document.createElement("div");
-        div.innerHTML = data["firstname"];
-        document.body.appendChild(div)
+        if (data["id"] != undefined) {
+            let div = document.createElement("div");
+            div.innerHTML = data["firstname"];
+            document.body.appendChild(div)
+        }
     }
 }
 
