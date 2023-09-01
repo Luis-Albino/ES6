@@ -3,14 +3,16 @@ let arr2 = [3, 4, 3, 5, 3, 6, 8];
 
 // version 1 //
 function intersection (arr1,arr2) {
-    let interArr = [];
+    let intersectionArr = [];
+    let intersectionIndices = {};
     for (let el of arr1) {
-        if (arr2.includes(el)) {
-            arr2.splice(arr2.indexOf(el),1)
-            interArr.push(el)
+        intersectionIndices[el] = (intersectionIndices[el] != undefined)?arr2.indexOf(el,intersectionIndices[el]+1):arr2.indexOf(el);
+        let index = intersectionIndices[el];
+        if (index >= 0) {
+            intersectionArr.push(el)
         }
     }
-    return interArr
+    return intersectionArr
 }
 
 console.log(intersection(arr1,arr2));
