@@ -1,5 +1,5 @@
  function appendNextMonth (str) {
-    let monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    let monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December","January"];
     let monthArray = str.match(/\w+/g);
     let lastIndex = monthArray.lastIndexOf(monthArray[0])-1;
     let month = monthArray[lastIndex];
