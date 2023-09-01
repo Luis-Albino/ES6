@@ -9,6 +9,6 @@ var candidate = {
     }
 };
 
-let infoDiv = document.querySelectorAll("#body div div");
+let infoDiv = document.querySelectorAll("#body .info div");
 infoDiv[0].textContent = candidate.name.firstname;
 infoDiv[1].textContent = candidate.printName();
