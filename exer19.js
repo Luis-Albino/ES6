@@ -5,8 +5,12 @@ function parse (str,pattern) {
     let j = 0;
     let index = -1;
     for (let char of str) {
-        if (char === matchArray[i] || matchArray[i] === "*") {
+        if (char === matchArray[i]|| matchArray[i] === "*") {
             i++;
+            pattern += char;
+        }
+        else if (char === matchArray[0]) {
+            i = 1;
             pattern += char;
         }
         else {
@@ -26,3 +30,4 @@ function parse (str,pattern) {
 
 console.log(parse("hello world","*"))
 console.log(parse("hello world","l**"))
+console.log(parse("hello world","lo"))
