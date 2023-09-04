@@ -1,16 +1,18 @@
 function moveZeroes (arr) {
-    let j = 0;
-    let increment = 1;
-    while (j < arr.length-1) {
-        let i = arr.indexOf(0);
-        j = i + increment;
-        if (arr[j]) {
-            console.log(i,j);
-            [arr[i],arr[j]] = [arr[j],arr[i]];
+    let i = 0;
+    let j = 1;
+    while (j < arr.length) {
+        sortValue = arr[j];
+        if (arr[i] === 0) {
+            if (sortValue != 0) {
+                arr[i] = sortValue;
+                arr[j] = 0;
+                i++;
+                j = j+1;
+            }
+            else j++;
         }
-        else {
-            increment += 1;
-        };
+        else i++;
     }
     return arr
 }
