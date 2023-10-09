@@ -9,9 +9,9 @@ function parse (str,pattern) {
             i++;
             pattern += char;
         }
-        else if (char === matchArray[0]) {
+        else if (char === matchArray[0] || matchArray[0] === "*") {
             i = 1;
-            pattern += char;
+            pattern = char;
         }
         else {
             i = 0;
