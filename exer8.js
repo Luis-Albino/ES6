@@ -8,11 +8,14 @@ function moveZeroes (arr) {
                 arr[i] = sortValue;
                 arr[j] = 0;
                 i++;
-                j = j+1;
+                j++;
             }
             else j++;
         }
-        else i++;
+        else {
+            i++;
+            j++;
+        }
     }
     return arr
 }
