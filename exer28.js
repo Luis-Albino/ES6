@@ -15,8 +15,6 @@ var async = {
             })
         ,Promise.resolve());
 
-        console.log(context)
-
         callBack(context)
 
     }
