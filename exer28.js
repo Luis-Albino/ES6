@@ -1,26 +1,24 @@
 var async = {
-    getAll: function (urlArray,callBack) {
-        let obj = {};
-        for (let i in urlArray) {
-            obj[i] = fetch(urlArray[i])
-        }
-        (async function () {
-            for (let key in obj) {
-                let responseValue = await obj[key];
-                let myPromise = new Promise ((resolve,reject) => {
-                    if (responseValue.ok) {
-                        return resolve(responseValue)
-                    }
-                    else {
-                        return reject(new Error("Not found"))
-                    }
-                });
-                myPromise
-                .then(response => response.json())
-                .then(data => callBack(data))
-                .catch(error => callBack(error))     
-            } 
-        })();
+    getAll: async function (urlArray,callBack) {
+        let promiseArray = urlArray.map(url => fetch(url));
+
+        let context = {};
+        let j = 0;
+        await promiseArray.reduce((chain,promise) => chain
+            .then(function () {
+                return promise
+            })
+            .then(response => response.json())
+            .then(response => {
+                context[j] = response;
+                j++;
+            })
+        ,Promise.resolve());
+
+        console.log(context)
+
+        callBack(context)
+
     }
 }
 
@@ -30,10 +28,12 @@ var async = {
 
 let myUrlArray = ['http://localhost:3000/candidates/0','http://localhost:3000/candidates/1','http://localhost:3000/candidates/2','http://localhost:3000/candidates/3'];
 
-function myCallBack (data) {
-    let div = document.createElement("div");
-    div.innerHTML = data["firstname"] ?? data;
-    document.body.appendChild(div)
+function myCallBack (responseObj) {
+    for (let key in responseObj) {
+        let div = document.createElement("div");
+        div.innerHTML = responseObj[key]["firstname"] ?? "Not found";
+        document.body.appendChild(div)
+    }
 }
 
 async.getAll(myUrlArray,myCallBack)
