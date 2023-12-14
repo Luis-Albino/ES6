@@ -6,14 +6,14 @@ function intersection (arr1,arr2) {
     let obj = {};
 
     for (let el of arr1) {
-        if (!obj[[el]]) obj[[el]] = 1
+        if (!obj[el]) obj[[el]] = 1
         else obj[[el]]++;
     }
 
     for (let el of arr2) {
-        if (obj[[el]]) {
+        if (obj[el]) {
             intersection.push(el);
-            obj[[el]] -= 1;
+            obj[el] -= 1;
         }
     }
 
