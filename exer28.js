@@ -1,27 +1,34 @@
 var async = {
     getAll: async function (urlArray,callBack) {
+        let context = {};
+        let i = 0;
         let promiseArray = urlArray.map(url => fetch(url));
 
         await promiseArray.reduce((chain,promise) => chain
             .then(function () {
                 return promise
             })
-            .then(response => response.json())
-            .then(response => callBack(response))
-            .catch(err => callBack(err))
+            .then(response => { 
+                i++;
+                return response.json()
+            })
+            .then(response => { context[i] = response })
+            .catch(error => { context[i]= { error } })
         ,Promise.resolve());
+
+        callBack(context)
     }
 }
 
+// Callback Example //
 
-//////////////////////////////////////////////////////
-// Example: using the same localhost of exercise 18 //
-//////////////////////////////////////////////////////
-
-let myUrlArray = ['http://localhost:3000/candidates/0','http://localhost:3000/candidates/1','http://localhost:3000/candidates/2','http://localhost:3000/candidates/3'];
-
-function myCallBack (data) {
-        let div = document.createElement("div");
-        div.innerHTML = data["firstname"] ?? "Not found";
-        document.body.appendChild(div)
+function cb (context) {
+    for (let i of Object.keys(context)) {
+        if (context[i].error) {
+            console.log(`Error: ${context[i].error}`)
+        }
+        else {
+            console.log(`Response: ${context[i]}`)
+        }
+    }
 }
